@@ -8,7 +8,7 @@ import Offline from "./components/Atoms/Offline";
 function Home() {
   const { status } = UseOnline();
   const online = () => {
-    toast.success("you are online !", {
+    toast.success("You are online !", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -22,7 +22,7 @@ function Home() {
   };
 
   const ofline = () => {
-    toast.error(" you are ofline!", {
+    toast.error(" You are offline!", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
