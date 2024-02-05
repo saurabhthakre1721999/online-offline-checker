@@ -7,13 +7,24 @@ const Localform = () => {
     Email: "",
   });
   const [status, setstatus] = useState(false);
+  const { firstname, lastname, Email } = Users;
   const oninputchange = (e) => {
     const { name, value } = e.target;
+    SetUsers((pre) => ({ ...pre, [name]: value }));
 
-    SetUsers({ ...Users, [name]: value });
     console.log("spread", { ...Users });
   };
-  useEffect(() => {});
+  useEffect(() => {
+    const form = JSON.parse(localStorage.getItem("newuser"));
+    SetUsers((pre) => ({ ...pre, ...form }));
+    console.log("afterlocalsave", form);
+  }, []);
+  useEffect(() => {
+    if (firstname !== "" && lastname !== "" && Email !== "") {
+      localStorage.setItem("newuser", JSON.stringify(Users));
+    }
+  }, [firstname, lastname, Email]);
+  String;
   return (
     <>
       <form action="">
@@ -21,7 +32,7 @@ const Localform = () => {
         <input
           type="text"
           name="firstname"
-          value={Users.firstname}
+          value={firstname}
           id=""
           onChange={oninputchange}
         />{" "}
@@ -30,16 +41,16 @@ const Localform = () => {
         <input
           type="text"
           name="lastname"
-          value={Users.lastname}
+          value={lastname}
           id=""
           onChange={oninputchange}
         />{" "}
         <br /> <br />
         <label htmlFor="Email">Email</label>
         <input
-          type="mail"
+          type="email"
           name="Email"
-          value={Users.lastname}
+          value={Email}
           id=""
           onChange={oninputchange}
         />
@@ -52,7 +63,7 @@ const Localform = () => {
             click
           </button>
         </div>
-        {status && <div> {Users.FirstName}</div>}
+        {status && <div> {firstname}</div>}
       </form>
     </>
   );
